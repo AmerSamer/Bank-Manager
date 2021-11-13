@@ -52,10 +52,10 @@ const Main = () => {
                 }) : <div>Loading...</div>
             }
             {
-                accounts ? <AccountsAdd addItem={addAcctHandler} /> : <div>Loading...</div>
+                accounts ? <AccountsAdd accounts={accounts} addItem={addAcctHandler} /> : <div>Loading...</div>
             }
             {
-                accounts ? <AccountsDepositOrWithdrawal addItem={updateAcctHandler} /> : <div>Loading...</div>
+                accounts ? <AccountsDepositOrWithdrawal accounts={accounts} addItem={updateAcctHandler} /> : <div>Loading...</div>
             }
             {
                 accounts ? <AccountsCredit accounts={accounts} addItem={creditAccountHandler} /> : <div>Loading...</div>

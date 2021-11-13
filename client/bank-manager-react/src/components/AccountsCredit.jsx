@@ -45,10 +45,11 @@ const AccountsCredit = ({ accounts , cash, credit, passportId, depositOrWithdraw
     }
     return (
         <div>
+            <br/>
             Account Credit
             <div>
-                <input type={'number'} name={'passportId'} onChange={addCreditHandler} />
-                <input type={'number'} name={'credit'} onChange={addCreditHandler} />
+            passportId:<input type={'number'} name={'passportId'} onChange={addCreditHandler} />
+            credit:<input type={'number'} name={'credit'} onChange={addCreditHandler} />
                 {/* <input type={'text'} name={'depositOrWithdrawal'} placeholder={'Enter "deposit" to deposit -- "withdrawal" to withdrawal'} onChange={addHandler} /> */}
                 <input type={'button'} value={'Add Credit'} onClick={addAccountCreditHandler} />
             </div>

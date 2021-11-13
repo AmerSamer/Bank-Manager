@@ -22,18 +22,24 @@ const FromAccountTo = ({ accounts, cash, credit, passportId, depositOrWithdrawal
             if (find) {
                 if (find2) {
                     if(transferenceAccount.cash > 0){
-                        axios.put(`http://localhost:4001/put`, transferenceAccount)
-                        .then((res) => {
-                            if (res.status === 200) {
-                                setMsg(`The transfer from ${transferenceAccount.passportId} ID to ${transferenceAccount.passportIdReciever} ID card was successful, at ${new Date()}`)
-                                addItem(transferenceAccount)
-                            }
-                            else {
-                                alert("Something went wrong")
-                            }
-                        }).catch((err) => {
-                            setMsg('ERROR')
-                        })
+                        const total = find.cash + find.credit - transferenceAccount.cash
+                        if(total >= 0){
+                            axios.put(`http://localhost:4001/put`, transferenceAccount)
+                            .then((res) => {
+                                if (res.status === 200) {
+                                    setMsg(`The transfer from ${transferenceAccount.passportId} ID to ${transferenceAccount.passportIdReciever} ID card was successful, at ${new Date()}`)
+                                    addItem(transferenceAccount)
+                                }
+                                else {
+                                    alert("Something went wrong")
+                                }
+                            }).catch((err) => {
+                                setMsg('ERROR')
+                            })
+                        }else{
+                            setMsg(`You does not have enught money in your account to withdrawal ${transferenceAccount.cash} NIS`)
+                        }
+                        
                     }else{
                         setMsg('You should transfer a possitive amount')
                     }
@@ -50,11 +56,12 @@ const FromAccountTo = ({ accounts, cash, credit, passportId, depositOrWithdrawal
     }
     return (
         <div>
+            <br/>
             From Account To
             <div>
-                <input type={'number'} name={'passportId'} onChange={transferenceHandler} />
-                <input type={'number'} name={'passportIdReciever'} onChange={transferenceHandler} />
-                <input type={'number'} name={'cash'} onChange={transferenceHandler} />
+            passportId: <input type={'number'} name={'passportId'} onChange={transferenceHandler} />
+            passportIdReciever: <input type={'number'} name={'passportIdReciever'} onChange={transferenceHandler} />
+            cash:<input type={'number'} name={'cash'} onChange={transferenceHandler} />
                 <input type={'button'} value={'Enter'} onClick={fromAccountToHandler} />
             </div>
             <div style={{ color: 'green', fontSize: '20px' }}>
