@@ -28,8 +28,8 @@ app.post('/', (req, res) => {
     }
     const acount = {
         passportId: req.body.passportId,
-        cash: req.body.cash,
-        credit: req.body.credit,
+        cash: 0,
+        credit: 0,
     }
     acounts.push(acount)
     return res.status(209).json({ acount: acount })
