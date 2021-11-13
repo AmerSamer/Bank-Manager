@@ -3,6 +3,7 @@ import axios from "axios";
 import AccountsGet from "./AccountsGet";
 import AccountsAdd from "./AccountsAdd";
 import AccountsDepositOrWithdrawal from "./AccountsDepositOrWithdrawal";
+import AccountsCredit from "./AccountsCredit";
 const Main = () => {
     const [accounts, setAccounts] = React.useState([]);
 
@@ -25,6 +26,13 @@ const Main = () => {
         }else if (acct.depositOrWithdrawal === "withdrawal") {
             find.cash = find.cash - acct.cash 
         }
+        const accountsArrayHelper = [...accounts]
+        setAccounts(accountsArrayHelper)
+    }
+    const creditAccountHandler = (acct) => {
+        const find = accounts.find((f)=> f.passportId === acct.passportId)
+            find.credit = acct.credit 
+        
         // console.log(acct.passportId);
         const accountsArrayHelper = [...accounts]
         setAccounts(accountsArrayHelper)
@@ -41,6 +49,9 @@ const Main = () => {
             }
             {
                 accounts ? <AccountsDepositOrWithdrawal addItem={updateAcctHandler}/> : <div>Loading...</div>
+            }
+            {
+                accounts ? <AccountsCredit addItem={creditAccountHandler}/> : <div>Loading...</div>
             }
             {
                 // accounts.acounts ? accounts.acounts.map((item) => {

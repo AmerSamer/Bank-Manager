@@ -16,13 +16,15 @@ const AccountsDepositOrWithdrawal = ({ cash, credit, passportId, depositOrWithdr
         })
     }
     const addAccountHandler = () => {
-        // console.log(addAccount);
         axios.put(`http://localhost:4001/put`, addAccount)
             .then((res) => {
                 if (res.status === 200) {
-                    setMsg('Account Edited Successfully :)')
+                    if(addAccount.depositOrWithdrawal === "deposit"){
+                        setMsg(`A deposit of NIS ${addAccount.cash}, was made successfully, at ${new Date()}`)
+                    }else if(addAccount.depositOrWithdrawal === "withdrawal"){
+                        setMsg(`A withdrawal of NIS ${addAccount.cash}, was made successfully, at ${new Date()}`)
+                    }
                     addItem(addAccount)
-                    // console.log('15');
                 }
                 else {
                     alert("Something went wrong")
@@ -33,13 +35,14 @@ const AccountsDepositOrWithdrawal = ({ cash, credit, passportId, depositOrWithdr
     }
     return (
         <div>
+            Deposit Or Withdrawal
             <div>
                 <input type={'number'} name={'passportId'} onChange={addHandler} />
                 <input type={'number'} name={'cash'} onChange={addHandler} />
-                <input type={'text'} name={'depositOrWithdrawal'} placeholder={'Enter "deposit" to deposit -- "withdrawal" to withdrawal'} onChange={addHandler} />
+                <input type={'text'} name={'depositOrWithdrawal'} placeholder={'Enter "deposit"--"withdrawal"'} onChange={addHandler} />
                 <input type={'button'} value={'Enter'} onClick={addAccountHandler} />
             </div>
-            <div>
+            <div style={{color: 'green' , fontSize:'20px'}}>
                 {msg ? msg : ''}
             </div>
         </div>
