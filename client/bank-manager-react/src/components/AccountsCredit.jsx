@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-const AccountsCredit = ({ cash, credit, passportId, depositOrWithdrawal, addItem }) => {
+const AccountsCredit = ({ accounts , cash, credit, passportId, depositOrWithdrawal, addItem }) => {
     const [creditAccount, setCreditAccount] = React.useState({
         passportId,
         credit,
@@ -16,18 +16,32 @@ const AccountsCredit = ({ cash, credit, passportId, depositOrWithdrawal, addItem
         })
     }
     const addAccountCreditHandler = () => {
-        axios.put(`http://localhost:4001/put`, creditAccount)
-            .then((res) => {
-                if (res.status === 200) {
-                    setMsg(`The credit is changed to NIS ${creditAccount.credit}, at ${new Date()}`)
-                    addItem(creditAccount)
+        if (creditAccount.credit && creditAccount.passportId) {
+            const find = accounts.find((f) => f.passportId === creditAccount.passportId)
+            if (find) {
+                if(creditAccount.credit > 0){
+                    axios.put(`http://localhost:4001/put`, creditAccount)
+                    .then((res) => {
+                        if (res.status === 200) {
+                            setMsg(`The credit is changed to NIS ${creditAccount.credit}, at ${new Date()}`)
+                            addItem(creditAccount)
+                        }
+                        else {
+                            alert("Something went wrong")
+                        }
+                    }).catch((err) => {
+                        setMsg('ERROR')
+                    })
+                }else{
+                    setMsg('You should put a possitive credit amount')
                 }
-                else {
-                    alert("Something went wrong")
-                }
-            }).catch((err) => {
-                setMsg('ERROR')
-            })
+            }else{
+                setMsg('passportId Does not Exist!')
+            }
+        }else{
+            setMsg('You Should Fill in all the inputs')
+        }
+        
     }
     return (
         <div>

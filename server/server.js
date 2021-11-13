@@ -44,7 +44,7 @@ app.put('/put', (req, res) => {
         return res.status(400).json({ error: 'Account is not exist' })
     }
 
-    if ((passportId) && (cash) && (!passportIdReciever) && (!credit)) {
+    if ((passportId) && (cash) && (cash > 0) && (!passportIdReciever) && (!credit)) {
         if (depositOrWithdrawal === "deposit") {
             item.cash = (item.cash + cash)
             return res.status(200).json({ success: item })
@@ -58,10 +58,10 @@ app.put('/put', (req, res) => {
         }
         return res.status(400).json({ success: 'ERROR' })
 
-    } else if ((passportId) && (credit) && (!passportIdReciever) && (!cash)) {
+    } else if ((passportId) && (credit) && (credit > 0) && (!passportIdReciever) && (!cash)) {
         item.credit = credit
         return res.status(200).json({ success: item })
-    } else if ((passportId) && (cash) && (passportIdReciever) && (!credit)) {
+    } else if ((passportId) && (cash) && (cash > 0) && (passportIdReciever) && (!credit)) {
         let itemRec = acounts.find((item) => {
             return item.passportId === parseInt(passportIdReciever)
         })

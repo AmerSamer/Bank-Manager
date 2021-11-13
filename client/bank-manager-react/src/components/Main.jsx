@@ -4,6 +4,7 @@ import AccountsGet from "./AccountsGet";
 import AccountsAdd from "./AccountsAdd";
 import AccountsDepositOrWithdrawal from "./AccountsDepositOrWithdrawal";
 import AccountsCredit from "./AccountsCredit";
+import FromAccountTo from "./FromAccountTo";
 const Main = () => {
     const [accounts, setAccounts] = React.useState([]);
 
@@ -16,24 +17,30 @@ const Main = () => {
     }, [])
 
     const addAcctHandler = (acct) => {
-        const accountsArrayHelper = [...accounts , acct]
+        const accountsArrayHelper = [...accounts, acct]
         setAccounts(accountsArrayHelper)
     }
     const updateAcctHandler = (acct) => {
-        const find = accounts.find((f)=> f.passportId === acct.passportId)
-        if(acct.depositOrWithdrawal === "deposit"){
-            find.cash = find.cash + acct.cash 
-        }else if (acct.depositOrWithdrawal === "withdrawal") {
-            find.cash = find.cash - acct.cash 
+        const find = accounts.find((f) => f.passportId === acct.passportId)
+        if (acct.depositOrWithdrawal === "deposit") {
+            find.cash = find.cash + acct.cash
+        } else if (acct.depositOrWithdrawal === "withdrawal") {
+            find.cash = find.cash - acct.cash
         }
         const accountsArrayHelper = [...accounts]
         setAccounts(accountsArrayHelper)
     }
     const creditAccountHandler = (acct) => {
-        const find = accounts.find((f)=> f.passportId === acct.passportId)
-            find.credit = acct.credit 
-        
-        // console.log(acct.passportId);
+        const find = accounts.find((f) => f.passportId === acct.passportId)
+        find.credit = acct.credit
+        const accountsArrayHelper = [...accounts]
+        setAccounts(accountsArrayHelper)
+    }
+    const TransferAccountHandler = (acct) => {
+        const find = accounts.find((f) => f.passportId === acct.passportId)
+        const find2 = accounts.find((f) => f.passportId === acct.passportIdReciever)
+        find.cash = find.cash - acct.cash
+        find2.cash = find2.cash + acct.cash
         const accountsArrayHelper = [...accounts]
         setAccounts(accountsArrayHelper)
     }
@@ -45,13 +52,16 @@ const Main = () => {
                 }) : <div>Loading...</div>
             }
             {
-                accounts ? <AccountsAdd addItem={addAcctHandler}/> : <div>Loading...</div>
+                accounts ? <AccountsAdd addItem={addAcctHandler} /> : <div>Loading...</div>
             }
             {
-                accounts ? <AccountsDepositOrWithdrawal addItem={updateAcctHandler}/> : <div>Loading...</div>
+                accounts ? <AccountsDepositOrWithdrawal addItem={updateAcctHandler} /> : <div>Loading...</div>
             }
             {
-                accounts ? <AccountsCredit addItem={creditAccountHandler}/> : <div>Loading...</div>
+                accounts ? <AccountsCredit accounts={accounts} addItem={creditAccountHandler} /> : <div>Loading...</div>
+            }
+            {
+                accounts ? <FromAccountTo accounts={accounts} addItem={TransferAccountHandler} /> : <div>Loading...</div>
             }
             {
                 // accounts.acounts ? accounts.acounts.map((item) => {
