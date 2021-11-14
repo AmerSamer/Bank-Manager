@@ -79,4 +79,4 @@ app.put('/put', (req, res) => {
     return res.status(400).json({ success: 'ERROR' })
 })
 
-app.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}`));
+app.listen(process.env.PORT || 4001, () => console.log(`Listening on port ${process.env.PORT || 4001}`));
