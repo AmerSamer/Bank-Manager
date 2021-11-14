@@ -3,6 +3,7 @@ const AccountsGet = ({cash ,credit , passportId }) => {
 
     return (
         <div>
+         
             passportId : {passportId}
             ,cash : {cash},
             credit: {credit},

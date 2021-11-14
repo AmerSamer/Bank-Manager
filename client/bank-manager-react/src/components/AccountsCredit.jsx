@@ -46,7 +46,7 @@ const AccountsCredit = ({ accounts , cash, credit, passportId, depositOrWithdraw
     return (
         <div>
             <br/>
-            Account Credit
+            <span style={{color: "black" , fontSize:"30px"}}> Account Credit</span>
             <div>
             passportId:<input type={'number'} name={'passportId'} onChange={addCreditHandler} />
             credit:<input type={'number'} name={'credit'} onChange={addCreditHandler} />

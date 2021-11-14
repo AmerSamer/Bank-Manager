@@ -5,6 +5,7 @@ import AccountsAdd from "./AccountsAdd";
 import AccountsDepositOrWithdrawal from "./AccountsDepositOrWithdrawal";
 import AccountsCredit from "./AccountsCredit";
 import FromAccountTo from "./FromAccountTo";
+import SpiAccountDetails from "./SpiAccountDetails";
 const Main = () => {
     const [accounts, setAccounts] = React.useState([]);
 
@@ -46,7 +47,9 @@ const Main = () => {
     }
     return (
         <div>
+            <span style={{color: "black" , fontSize:"30px"}}> All Accounts</span>
             {
+                
                 accounts ? accounts.map((item) => {
                     return <AccountsGet key={item.passportId} cash={item.cash} credit={item.credit} passportId={item.passportId} />
                 }) : <div>Loading...</div>
@@ -63,10 +66,8 @@ const Main = () => {
             {
                 accounts ? <FromAccountTo accounts={accounts} addItem={TransferAccountHandler} /> : <div>Loading...</div>
             }
-            {
-                // accounts.acounts ? accounts.acounts.map((item) => {
-                //     return <AccountsAdd key={item.passportId} cash={item.cash} credit={item.credit} passportId={item.passportId} />
-                // }) : <div>Loading...</div>
+           {
+                accounts ? <SpiAccountDetails accounts={accounts} addItem={TransferAccountHandler} /> : <div>Loading...</div>
             }
         </div>
     )

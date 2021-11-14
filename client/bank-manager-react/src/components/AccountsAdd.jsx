@@ -42,7 +42,9 @@ const AccountsAdd = ({ accounts , cash, credit, passportId, addItem }) => {
     return (
         <div>
             <br/>
-            Add New Account
+            <span style={{color: "black" , fontSize:"30px"}}> Add New Account</span>
+
+            
             <div>
             passportId: <input type={'number'} name={'passportId'} onChange={addHandler} />
                 {/* <input type={'number'} name={'cash'} value={editItem.price} onChange={textHandler} /> */}

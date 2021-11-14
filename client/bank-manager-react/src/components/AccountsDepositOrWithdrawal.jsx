@@ -68,7 +68,8 @@ const AccountsDepositOrWithdrawal = ({ accounts, cash, credit, passportId, depos
     return (
         <div>
             <br />
-            Deposit Or Withdrawal
+            <span style={{color: "black" , fontSize:"30px"}}> Deposit Or Withdrawal</span>
+           
             <div>
                 passportId: <input type={'number'} name={'passportId'} onChange={addHandler} />
                 cash: <input type={'number'} name={'cash'} onChange={addHandler} />

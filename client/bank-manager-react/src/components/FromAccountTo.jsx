@@ -57,7 +57,7 @@ const FromAccountTo = ({ accounts, cash, credit, passportId, depositOrWithdrawal
     return (
         <div>
             <br/>
-            From Account To
+            <span style={{color: "black" , fontSize:"30px"}}>From Account To</span>
             <div>
             passportId: <input type={'number'} name={'passportId'} onChange={transferenceHandler} />
             passportIdReciever: <input type={'number'} name={'passportIdReciever'} onChange={transferenceHandler} />
